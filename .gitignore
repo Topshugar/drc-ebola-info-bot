@@ -1,15 +1,26 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+
+# Venv
 venv/
+env/
+ENV/
+.venv/
+
+# Env & secrets
 .env
 .env.local
-*.log
+.env.production
 
-# Flask
-instance/
-.webassets-cache
+# Logs
+*.log
+*.sqlite3
 
 # OS
 .DS_Store
@@ -18,3 +29,4 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+*.swp
