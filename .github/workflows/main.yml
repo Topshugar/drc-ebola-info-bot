@@ -1,0 +1,25 @@
+name: Test Ebola Bot
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: |
+          python app.py &
+          sleep 3
+          echo "=== Test 1: Language Menu ==="
+          curl -s -X POST http://127.0.0.1:5000/ussd -d "text="
+          echo ""
+          echo "=== Test 2: French Menu ==="
+          curl -s -X POST http://127.0.0.1:5000/ussd -d "text=1"
+          echo ""
+          echo "=== Test 3: Centres (Kigonze should be CLOSED) ==="
+          curl -s -X POST http://127.0.0.1:5000/ussd -d "text=1*3"
+          echo ""
+          echo "=== Test 4: Swahili SMS ==="
+          curl -s -X POST http://127.0.0.1:5000/sms -d "text=dalili"
